@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import TitleComponent from '../details-components/TitleComponent';
 import './Input.scss'
 
 export default class Input extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
    const {props} = this;

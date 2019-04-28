@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Input from './Input';
-import projectList from '../listingPage/ProjectsListData';
+import ButtonComponent from '../details-components/ButtonComponent';
+import './Form.scss';
 
 export default class Form extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ export default class Form extends Component {
       status: 'new'
     };
     console.log(data);
-    
+
     // this.props.projectsListData.push({
     //   id: this.props.projectsListData.length + 1,
     //   projectName: this.state.projectName,
@@ -59,25 +60,25 @@ export default class Form extends Component {
 
     return (
       <form className="form">
-          <Input type="text"
-                 label="Project Name"
-                 name="projectName"
-                 onChange={this.handleProjectNameChange}
-                 placeholder={'Enter Project Name'}/>
-          <Input type="text"
-                 label="Site URL"
-                 name="siteUrl"
-                 onChange={this.handleSiteUrlChange}
-                 placeholder={'www.example.com'}/>
-          <Input type="text"
-                 label="Client Name"
-                 name="clientName"
-                 onChange={this.handleClientNameChange}
-                 placeholder={'Enter Client Name'}/>
-          <div className="buttons">
-            <button onClick={closePopup}>Cancel</button>
-            <button onClick={this.handleSubmit}>Save</button>
-          </div>
+        <Input type="text"
+               label="Project Name"
+               name="projectName"
+               onChange={this.handleProjectNameChange}
+               placeholder={'Enter Project Name'}/>
+        <Input type="text"
+               label="Site URL"
+               name="siteUrl"
+               onChange={this.handleSiteUrlChange}
+               placeholder={'www.example.com'}/>
+        <Input type="text"
+               label="Client Name"
+               name="clientName"
+               onChange={this.handleClientNameChange}
+               placeholder={'Enter Client Name'}/>
+        <div className="buttons">
+          <ButtonComponent class='btn-white' name='Cancel' onClick={closePopup}/>
+          <ButtonComponent class='btn-blue' name='Save' onClick={this.handleSubmit}/>
+        </div>
       </form>
     );
   }

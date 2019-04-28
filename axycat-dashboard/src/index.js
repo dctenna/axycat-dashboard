@@ -17,7 +17,7 @@ import thunk from 'redux-thunk'
 import {reduxFirestore, getFirestore} from 'redux-firestore'
 import {reactReduxFirebase, getFirebase} from 'react-redux-firebase'
 import fbConfig from './config/fbConfig'
-import Issues from "./components/Pages/Issues";
+//import Issues from "./components/Pages/Issues";
 
 const store = createStore(rootReducer,
     compose(
@@ -62,7 +62,7 @@ class App extends Component {
                         <Route path="/detail" component={Details}/>
                         <Route path="/listing" component={Listing}/>
                         <Route path="/newproject" component={NewProjectPopUp}/>
-                        <Route path="/issues" component={Issues}/>
+                        {/*<Route path="/issues" component={Issues}/>*/}
                         <Route component={Error}/>
 
                     </Switch>
