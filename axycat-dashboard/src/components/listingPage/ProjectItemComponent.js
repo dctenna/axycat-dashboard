@@ -1,7 +1,8 @@
 import React from 'react';
 import './ProjectItemComponent.scss';
 
-export default class ProjectItemComponent extends React.Component {
+export default class
+ProjectItemComponent extends React.Component {
     render() {
         const {id, projectName, website, date, clientName, issues, status} = this.props.data;
         return(
