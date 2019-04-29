@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
-import {BrowserRouter, Route, Switch, NavLink} from "react-router-dom";
+import {BrowserRouter, Route, Switch, Link, NavLink} from "react-router-dom";
 
 import Home from './components/Home';
 import Details from './components/Details'
@@ -17,59 +17,67 @@ import thunk from 'redux-thunk'
 import {reduxFirestore, getFirestore} from 'redux-firestore'
 import {reactReduxFirebase, getFirebase} from 'react-redux-firebase'
 import fbConfig from './config/fbConfig'
+import Issues from "./components/ProjectItemNavigation/Issues";
+import Reports from "./components/ProjectItemNavigation/Reports";
+import Pages from "./components/ProjectItemNavigation/Pages";
+import ProjectItemNavigation from "./components/ProjectItemNavigation/ProjectItemNavigation";
 //import Issues from "./components/Pages/Issues";
 
 const store = createStore(rootReducer,
-    compose(
-        applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
-        reduxFirestore(fbConfig),
-        reactReduxFirebase(fbConfig)
-    )
+  compose(
+    applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+    reduxFirestore(fbConfig),
+    reactReduxFirebase(fbConfig)
+  )
 );
 
 class App extends Component {
-    render() {
-        return (
-            <BrowserRouter>
-                <div>
-                    <header id='header'>
-                        <div className="logo">
-                            <TitleComponent title='AxyCAT'/>
-                        </div>
-                        <nav className="navigation">
-                            <NavLink className='nav-link' activeClassName="active" to="/">
-                                Home
-                            </NavLink>
-                            <NavLink className='nav-link' activeClassName="active" to={{pathname: "./detail"}}>
-                                Details
-                            </NavLink>
-                            <NavLink className='nav-link' activeClassName="active" to={{pathname: "./listing"}}>
-                                Listing
-                            </NavLink>
-                            <NavLink className='nav-link'
-                                     activeClassName="active"
-                                     to={{pathname: "./newproject"}}>
-                                NewProject
-                            </NavLink>
-                        </nav>
-                        <div className='buttons-container'>
-                            <ButtonComponent class='btn btn-blue' name='Sign up'/>
-                            <ButtonComponent class='btn btn-white' name='Login'/>
-                        </div>
-                    </header>
-                    <Switch>
-                        <Route path="/" component={Home} exact/>
-                        <Route path="/detail" component={Details}/>
-                        <Route path="/listing" component={Listing}/>
-                        <Route path="/newproject" component={NewProjectPopUp}/>
-                        {/*<Route path="/issues" component={Issues}/>*/}
-                        <Route component={Error}/>
-
-                    </Switch>
-                </div>
-            </BrowserRouter>
-        );
-    }
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <header id='header'>
+            <div className="logo">
+              <TitleComponent title='AxyCAT'/>
+            </div>
+            <nav className="navigation">
+              <NavLink className='nav-link' activeClassName="active" to="/">
+                Home
+              </NavLink>
+              <NavLink className='nav-link' activeClassName="active" to={{pathname: "./detail"}}>
+                Details
+              </NavLink>
+              <NavLink className='nav-link' activeClassName="active" to={{pathname: "./listing"}}>
+                Listing
+              </NavLink>
+              <NavLink className='nav-link'
+                       activeClassName="active"
+                       to={{pathname: "./newproject"}}>
+                NewProject
+              </NavLink>
+            </nav>
+            <div className='buttons-container'>
+              <ButtonComponent class='btn btn-blue' name='Sign up'/>
+              <ButtonComponent class='btn btn-white' name='Login'/>
+            </div>
+          </header>
+          <Switch>
+            <Route path="/" component={Home} exact/>
+            <Route path="/detail" component={Details}/>
+            <Route path="/listing" component={Listing}/>
+            <Route path="/newproject" component={NewProjectPopUp}/>
+            {/*<Route path="/issues" component={Issues}/>*/}
+            <Route path="/project-details" component={ ProjectItemNavigation }/>
+            <Route path="/accessibility-overview" component={Details}/>
+            <Route path="/pages" component={Pages}/>
+            <Route path="/issues" component={Issues}/>
+            <Route path="/reports" component={Reports}/>
+            <Route component={Error}/>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById("root"));

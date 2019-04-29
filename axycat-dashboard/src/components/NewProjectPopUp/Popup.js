@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './Popup.scss';
-import Form from './Form'
-import TitleComponent from '../details-components/TitleComponent'
+import Form from './Form';
+import TitleComponent from '../details-components/TitleComponent';
 
 export default class Popup extends Component {
 

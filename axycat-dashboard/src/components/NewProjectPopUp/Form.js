@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Input from './Input';
 import ButtonComponent from '../details-components/ButtonComponent';
 import './Form.scss';
+import { Redirect } from 'react-router-dom';
 
 export default class Form extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ export default class Form extends Component {
     this.state = {
       projectName: '',
       siteUrl: '',
-      clientName: ''
+      clientName: '',
+      redirect: false
     };
 
     this.handleProjectNameChange = this.handleProjectNameChange.bind(this);
@@ -19,8 +21,10 @@ export default class Form extends Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
+
     const data = {
-      id: this.props.projectsListData.length + 1,
+      // id: this.props.projectsListData.length + 1,
       projectName: this.state.projectName,
       website: this.state.siteUrl,
       clientName: this.state.clientName,
@@ -28,6 +32,11 @@ export default class Form extends Component {
       issues: '',
       status: 'new'
     };
+
+    this.setState(() => ({
+      redirect: true
+    }));
+
     console.log(data);
 
     // this.props.projectsListData.push({
@@ -55,6 +64,16 @@ export default class Form extends Component {
     this.setState({clientName: event.target.value});
   }
 
+  renderRedirect() {
+    if (this.state.redirect) {
+
+      return <Redirect to={{
+        pathname: '/project-details',
+        state: { projectName: this.state.projectName }
+      }}/*'/project-details' projectName={this.state.projectName}*//>
+    }
+  }
+
   render() {
     const {closePopup} = this.props;
 
@@ -76,8 +95,9 @@ export default class Form extends Component {
                onChange={this.handleClientNameChange}
                placeholder={'Enter Client Name'}/>
         <div className="buttons">
-          <ButtonComponent class='btn-white' name='Cancel' onClick={closePopup}/>
-          <ButtonComponent class='btn-blue' name='Save' onClick={this.handleSubmit}/>
+          <ButtonComponent class='btn-white' name='Cancel' onClick={ closePopup }/>
+          {this.renderRedirect()}
+          <ButtonComponent class='btn-blue' name='Save' handler={ this.handleSubmit }/>
         </div>
       </form>
     );
